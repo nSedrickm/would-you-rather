@@ -1,2 +1,14 @@
-# would-you-rather
-A react/redux game 
+# Would You Rather
+A react/redux game
+
+## Getting Started 
+
+Clone the source code
+
+Install dependencies with `yarn install`
+
+Start Development server with `yarn dev`
+
+Open the browser at [http://localhost:3000](http://localhost:3000) for preview
+
+
