@@ -7,7 +7,7 @@ Clone the source code
 
 Install dependencies with `yarn install`
 
-Start Development server with `yarn dev`
+Start Development server with `yarn start`
 
 Open the browser at [http://localhost:3000](http://localhost:3000) for preview
 
