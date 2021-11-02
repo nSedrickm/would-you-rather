@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Toaster } from "react-hot-toast";
 import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Navbar } from "./components";
 import Login from "./pages/Login";
 import Dashboard from "./pages/DashBoard";
 
@@ -11,6 +12,7 @@ const App = () => {
     <Fragment>
       <BrowserRouter>
         <Toaster />
+        {authedUser && <Navbar />}
         <Switch>
           <Route exact path="/">
             {authedUser ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
