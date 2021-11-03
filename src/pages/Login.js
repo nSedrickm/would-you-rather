@@ -24,10 +24,10 @@ const Login = () => {
     if (loading) return <Loader />
 
     return (
-        <div className="h-screen p-4 text-gray-700 bg-gradient-to-br from-blue-600 to-green-600 md:p-8">
+        <div className="h-screen p-4 overflow-auto text-gray-700 bg-gradient-to-br from-blue-600 to-green-600 md:p-8">
             <header className="my-8 text-center text-white">
-                <h1 className="mb-4 text-5xl font-bold">Would You Rather</h1>
-                <p className="text-xl"> Please Select a user to Login and play</p>
+                <h1 className="mb-4 text-4xl font-bold md:text-5xl">Would You Rather</h1>
+                <p className="text-base md:text-xl"> Please Select a user to Login and play</p>
             </header>
 
             <div className="w-full mx-auto md:w-1/3">
