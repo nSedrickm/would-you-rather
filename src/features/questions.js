@@ -13,10 +13,11 @@ export const getQuestions = createAsyncThunk(
 
 export const addQuestion = createAsyncThunk(
     'questions/addQuestion',
-    async (question, { getState }) => {
+    async (question, { getState, dispatch }) => {
         const author = getState().auth.authedUser;
         question.author = author;
         const response = await API._saveQuestion(question);
+        await dispatch(getUsers());
         return response;
     }
 );
