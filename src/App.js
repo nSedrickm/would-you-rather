@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { Toaster } from "react-hot-toast";
-import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Navbar } from "./components";
+import { Navbar, PrivateRoute } from "./components";
 import Login from "./pages/Login";
 import Dashboard from "./pages/DashBoard";
 import NewQuestion from "./pages/NewQuestion.js";
@@ -18,25 +18,24 @@ const App = () => {
         <Toaster />
         {authedUser && <Navbar />}
         <Switch>
-          <Route exact path="/">
-            {authedUser ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
-          </Route>
+          <PrivateRoute exact path="/">
+            <Dashboard />
+          </PrivateRoute>
           <Route exact path="/login">
-            {authedUser ? <Redirect to="/dashboard" /> : <Login />}
+            <Login />
           </Route>
-          <Route exact path="/dashboard">
-            {authedUser ? <Dashboard /> : <Redirect to="/login" />}
-          </Route>
-          <Route exact path="/leaderboard">
-            {authedUser ? <LeaderBoard /> : <Redirect to="/login" />}
-          </Route>
-          <Route exact path="/add">
-            {authedUser ? <NewQuestion /> : <Redirect to="/login" />}
-          </Route>
-          <Route exact path="/questions/:qid">
-            {authedUser ? <QuestionDetails /> : <Redirect to="/login" />}
-          </Route>
-
+          <PrivateRoute exact path="/dashboard">
+            <Dashboard />
+          </PrivateRoute>
+          <PrivateRoute exact path="/leaderboard">
+            <LeaderBoard />
+          </PrivateRoute>
+          <PrivateRoute exact path="/add">
+            <NewQuestion />
+          </PrivateRoute>
+          <PrivateRoute exact path="/questions/:qid">
+            <QuestionDetails />
+          </PrivateRoute>
           <Route>
             <NotFound />
           </Route>

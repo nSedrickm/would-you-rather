@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { login } from "../features/auth";
 import { getUsers } from "../features/users";
 import { UserCard, Loader } from "../components";
+import { useLocation, useHistory } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const Login = () => {
@@ -10,6 +11,8 @@ const Login = () => {
     const users = useSelector((state) => state.users.users);
     const loading = useSelector((state) => state.users.loading);
     const dispatch = useDispatch();
+    const { state } = useLocation();
+    const history = useHistory();
 
     useEffect(() => {
         if (!Object.keys(users).length) {
@@ -21,7 +24,8 @@ const Login = () => {
         if (!user) {
             toast.error("Please select a user to login");
         } else {
-            dispatch(login(user))
+            dispatch(login(user));
+            history.push(state.from.pathname || "/dashboard")
         }
     }
 
