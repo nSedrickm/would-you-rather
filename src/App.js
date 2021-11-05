@@ -29,10 +29,10 @@ const App = () => {
           <Route exact path="/leaderboard">
             {authedUser ? <LeaderBoard /> : <Redirect to="/login" />}
           </Route>
-          <Route exact path="/new">
+          <Route exact path="/add">
             {authedUser ? <NewQuestion /> : <Redirect to="/login" />}
           </Route>
-          <Route exact path="/details/:qid">
+          <Route exact path="/questions/:qid">
             {authedUser ? <QuestionDetails /> : <Redirect to="/login" />}
           </Route>
         </Switch>

@@ -40,7 +40,7 @@ export const AnsweredQuestionCard = ({ author, question, answer }) => {
             <div className="flex flex-row flex-wrap my-4 space-x-2 md:space-x-0 md:flex-col md:my-0">
                 <Link
                     className="px-4 py-2 font-bold text-center text-green-500 bg-white border border-green-500 rounded-lg outline-none md:px-8 md:mb-2"
-                    to={`/details/${question.id}`}
+                    to={`/questions/${question.id}`}
                 >
                     details
                 </Link>

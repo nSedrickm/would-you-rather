@@ -24,7 +24,7 @@ export const Navbar = () => {
             <Link
                 className={clsx("flex items-center px-8 py-2 font-medium", active === 1 && "text-green-500")}
                 onClick={() => setActive(1)}
-                to="/new"
+                to="/add"
             >
                 <FiPlusCircle size={18} /> &nbsp; New Question
             </Link>

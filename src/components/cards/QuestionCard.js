@@ -84,7 +84,7 @@ export const QuestionCard = ({ author, question, authedUser }) => {
 
                 <Link
                     className="px-4 py-2 font-bold text-green-500 bg-white border border-green-500 rounded-lg outline-none md:px-8 md:mb-2"
-                    to={`/details/${question.id}`}
+                    to={`/questions/${question.id}`}
                 >
                     details
                 </Link>
