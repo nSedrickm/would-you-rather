@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getUsers, login } from "../features/auth";
+import { login } from "../features/auth";
+import { getUsers } from "../features/users";
 import { UserCard, Loader } from "../components";
 import toast from "react-hot-toast";
 
 const Login = () => {
     const [user, setUser] = useState(null);
-    const { users, loading } = useSelector((state) => state.auth);
+    const users = useSelector((state) => state.users.users);
+    const loading = useSelector((state) => state.users.loading);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getUsers());
-    }, [dispatch])
+        if (!Object.keys(users).length) {
+            dispatch(getUsers());
+        }
+    }, [dispatch, users])
 
     const handleLogin = () => {
         if (!user) {

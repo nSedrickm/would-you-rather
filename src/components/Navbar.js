@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 
 export const Navbar = () => {
-    const { authedUser } = useSelector((state) => state.auth);
-    const user = useSelector((state) => state.auth.users[authedUser])
+    const authedUser  = useSelector((state) => state.auth.authedUser);
+    const user = useSelector((state) => state.users.users[authedUser])
     const [active, setActive] = useState(0);
     const dispatch = useDispatch();
 

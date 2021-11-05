@@ -7,7 +7,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/DashBoard";
 
 const App = () => {
-  const { authedUser } = useSelector((state) => state.auth);
+  const authedUser  = useSelector((state) => state.auth.authedUser);
   return (
     <Fragment>
       <BrowserRouter>

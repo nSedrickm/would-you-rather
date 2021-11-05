@@ -1,19 +1,9 @@
 // user management
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import * as API from '../services/_DATA';
-
-export const getUsers = createAsyncThunk(
-    'auth/getUsers',
-    async () => {
-        const response = await API._getUsers();
-        return response;
-    }
-);
+import { createSlice } from "@reduxjs/toolkit";
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        users: {},
         authedUser: ''
     },
     reducers: {
@@ -27,26 +17,9 @@ export const authSlice = createSlice({
         logout: (state) => {
             return {
                 ...state,
-                users: [],
                 authedUser: ''
             }
         }
-    },
-    extraReducers: (builder) => {
-        builder
-            .addCase(getUsers.pending, (state) => {
-                return {
-                    ...state,
-                    loading: true
-                }
-            })
-            .addCase(getUsers.fulfilled, (state, action) => {
-                return {
-                    ...state,
-                    users: action.payload,
-                    loading: false
-                }
-            });
     },
 })
 
