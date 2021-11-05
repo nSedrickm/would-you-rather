@@ -114,10 +114,10 @@ export const DetailsCard = ({ question }) => {
                         Statistics
                     </h3>
                     <div className="flex-grow">
-                        <p className="my-2 font-bold">
+                        <p className="my-2">
                             {optionOnePercentage || 0}% of users chose optionOne
                         </p>
-                        <p className="my-2 font-bold">
+                        <p className="my-2">
                             {optionTwoPercentage || 0}% of users chose optionTwo
                         </p>
                     </div>
