@@ -6,6 +6,7 @@ import { Navbar } from "./components";
 import Login from "./pages/Login";
 import Dashboard from "./pages/DashBoard";
 import NewQuestion from "./pages/NewQuestion.js";
+import LeaderBoard from "./pages/LeaderBoard";
 
 const App = () => {
   const authedUser = useSelector((state) => state.auth.authedUser);
@@ -23,6 +24,9 @@ const App = () => {
           </Route>
           <Route exact path="/dashboard">
             {authedUser ? <Dashboard /> : <Redirect to="/login" />}
+          </Route>
+          <Route exact path="/leaderboard">
+            {authedUser ? <LeaderBoard /> : <Redirect to="/login" />}
           </Route>
           <Route exact path="/new">
             {authedUser ? <NewQuestion /> : <Redirect to="/login" />}
