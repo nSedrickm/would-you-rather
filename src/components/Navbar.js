@@ -14,7 +14,11 @@ export const Navbar = () => {
     const history = useHistory();
     const { pathname } = history.location;
 
-    console.log(history);
+    function handleLogOut() {
+        // clear the location state
+        history.replace("/", {});
+        dispatch(logout());
+    }
 
     const NavLinks = (
         <>
@@ -46,14 +50,14 @@ export const Navbar = () => {
 
     return (
         <Fragment>
-            <DesktopNav links={NavLinks} dispatch={dispatch} user={user} />
-            <MobileNav links={NavLinks} dispatch={dispatch} user={user} />
+            <DesktopNav links={NavLinks} handleLogOut={handleLogOut} user={user} />
+            <MobileNav links={NavLinks} handleLogOut={handleLogOut} user={user} />
         </Fragment>
     )
 }
 
 // desktop navbar
-const DesktopNav = ({ links, user, dispatch }) => (
+const DesktopNav = ({ links, user, handleLogOut }) => (
     <nav className="flex-col items-center justify-between hidden p-2 bg-white shadow-lg lg:flex md:flex-row">
         <h1 className="text-2xl font-bold">Would You Rather</h1>
         <div className="inline-flex px-2">
@@ -66,7 +70,7 @@ const DesktopNav = ({ links, user, dispatch }) => (
             <p className="mr-2 text-xl font-bold">{user?.name}</p>
             <button
                 className="inline-flex items-center px-3 py-2 text-red-500 rounded-lg"
-                onClick={() => dispatch(logout())}
+                onClick={() => handleLogOut()}
             >
                 <FiLogOut /> &nbsp; logout
             </button>
@@ -74,7 +78,7 @@ const DesktopNav = ({ links, user, dispatch }) => (
     </nav>
 );
 
-const MobileNav = ({ links, user, dispatch }) => {
+const MobileNav = ({ links, user, handleLogOut }) => {
     const [open, setOpen] = useState(false);
     function toggleMenu() {
         setOpen(!open);
@@ -102,7 +106,7 @@ const MobileNav = ({ links, user, dispatch }) => {
                         <p className="mr-2 text-xl font-bold">{user?.name}</p>
                         <button
                             className="inline-flex items-center px-3 py-2 text-red-500 rounded-lg"
-                            onClick={() => dispatch(logout())}
+                            onClick={() => handleLogOut()}
                         >
                             <FiLogOut /> &nbsp; logout
                         </button>
