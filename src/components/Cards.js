@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { saveQuestionAnswer } from "../features/questions";
 import { FiUser } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 export const UserCard = ({ name, selected, onClick, avatarUrl }) => {
     return (
@@ -106,17 +107,24 @@ export const QuestionCard = ({ author, question, authedUser }) => {
                 </label>
             </div>
 
-            <div className="my-4 md:my-0">
+            <div className="flex flex-row flex-wrap my-4 space-x-2 md:space-x-0 md:flex-col md:my-0">
                 {option && (
                     <button
-                        className="px-8 py-2 font-bold text-red-500 bg-white rounded-lg outline-none"
+                        className="px-4 py-2 font-bold text-red-500 bg-white border border-red-500 rounded-lg outline-none md:px-8 md:mb-2"
                         onClick={() => setOption(null)}
                     >
                         reset
                     </button>
                 )}
+
+                <Link
+                    className="px-4 py-2 font-bold text-green-500 bg-white border border-green-500 rounded-lg outline-none md:px-8 md:mb-2"
+                    to={`/details/${question.id}`}
+                >
+                    details
+                </Link>
                 <button
-                    className="px-8 py-2 font-bold text-white bg-green-500 rounded-lg outline-none"
+                    className="flex-grow px-4 py-2 font-bold text-white bg-green-500 rounded-lg outline-none md:px-8 md:flex-grow-0 md:mb-2"
                     onClick={() => handleAnswer()}
                 >
                     answer
@@ -165,8 +173,16 @@ export const AnsweredQuestionCard = ({ author, question, answer }) => {
                 </p>
             </div>
 
-            <div className="my-4 md:my-0">
-                <button className="px-8 py-2 font-bold text-white bg-green-500 rounded-lg outline-none cursor-not-allowed">
+            <div className="flex flex-row flex-wrap my-4 space-x-2 md:space-x-0 md:flex-col md:my-0">
+                <Link
+                    className="px-4 py-2 font-bold text-center text-green-500 bg-white border border-green-500 rounded-lg outline-none md:px-8 md:mb-2"
+                    to={`/details/${question.id}`}
+                >
+                    details
+                </Link>
+                <button
+                    className="flex-grow px-4 py-2 font-bold text-center text-white bg-green-500 rounded-lg outline-none md:px-8 md:flex-grow-0 md:mb-2"
+                >
                     {answer} selected
                 </button>
             </div>
@@ -233,3 +249,4 @@ export const LeaderBoardCard = ({ user }) => {
 LeaderBoardCard.propTypes = {
     user: PropTypes.object.isRequired
 };
+
