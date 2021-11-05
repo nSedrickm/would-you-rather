@@ -3,18 +3,23 @@ import { useSelector, useDispatch } from 'react-redux';
 import { FiLogOut, FiMenu, FiX, FiPlusCircle, FiHome, FiGrid } from 'react-icons/fi';
 import { logout } from '../features/auth';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import clsx from 'clsx';
 
 export const Navbar = () => {
-    const authedUser  = useSelector((state) => state.auth.authedUser);
+    const authedUser = useSelector((state) => state.auth.authedUser);
     const user = useSelector((state) => state.users.users[authedUser])
-    const [active, setActive] = useState(0);
+    const [active, setActive] = useState(null);
     const dispatch = useDispatch();
+    const history = useHistory();
+    const { pathname } = history.location;
+
+    console.log(history);
 
     const NavLinks = (
         <>
             <Link
-                className={clsx("flex items-center px-8 py-2 font-medium", active === 0 && "text-green-500")}
+                className={clsx("flex items-center px-8 py-2 font-medium", active === 0 || pathname === "/dashboard" || pathname === "/" ? "text-green-500" : "")}
                 onClick={() => setActive(0)}
                 to="/dashboard"
             >
@@ -22,7 +27,7 @@ export const Navbar = () => {
             </Link>
 
             <Link
-                className={clsx("flex items-center px-8 py-2 font-medium", active === 1 && "text-green-500")}
+                className={clsx("flex items-center px-8 py-2 font-medium", active === 1 || pathname === "/add" ? "text-green-500" : "")}
                 onClick={() => setActive(1)}
                 to="/add"
             >
@@ -30,7 +35,7 @@ export const Navbar = () => {
             </Link>
 
             <Link
-                className={clsx("flex items-center px-8 py-2 font-medium", active === 2 && "text-green-500")}
+                className={clsx("flex items-center px-8 py-2 font-medium", active === 2 || pathname === "/leaderboard" ? "text-green-500" : "")}
                 onClick={() => setActive(2)}
                 to="/leaderboard"
             >
