@@ -7,7 +7,7 @@ function sortUsers(users) {
     return Object.keys(users).sort((a, b) => {
         const aScore = users[a].questions.length + Object.keys(users[a].answers).length;
         const bScore = users[b].questions.length + Object.keys(users[b].answers).length;
-        return aScore <= bScore
+        return aScore < bScore
     })
 };
 

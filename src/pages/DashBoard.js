@@ -72,7 +72,7 @@ const DashBoard = () => {
                 </div>
                 {active === 0 ? (
                     <div className="py-4">
-                        {!sortedUnAnswered.length && <p>No unanswered questions</p>}
+                        {!sortedUnAnswered.length && <p className="p-4 bg-white">No unanswered questions</p>}
                         {sortedUnAnswered?.map(({ id }) => {
                             return (
                                 <QuestionCard
@@ -86,7 +86,7 @@ const DashBoard = () => {
                     </div>
                 ) : (
                     <div className="py-4">
-                        {!sortedAnswers.length && <p>No answered questions</p>}
+                        {!sortedAnswers.length && <p className="p-4 bg-white">No answered questions</p>}
                         {sortedAnswers?.map(({ id }) => {
                             return (
                                 <AnsweredQuestionCard
