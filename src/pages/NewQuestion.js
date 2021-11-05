@@ -16,9 +16,17 @@ const NewQuestion = () => {
 
     function handleNewQuestion(e) {
         e.preventDefault();
-        if (question.optionOneText && question.optionTwoText) {
-            dispatch(addQuestion(question));
-            history.push("/dashboard");
+        const { optionOneText, optionTwoText } = question;
+        // input validation
+        // check if both options are filled first
+        if (optionOneText && optionTwoText) {
+            // make sure they are unique 
+            if (optionOneText === optionTwoText) {
+                toast.error("please fill in different options")
+            } else {
+                dispatch(addQuestion(question));
+                history.push("/dashboard");
+            }
         } else {
             toast.error("Please fill answers for both options");
         }
@@ -48,6 +56,7 @@ const NewQuestion = () => {
                             onChange={(e) => setQuestion(prevState => {
                                 return { ...prevState, optionOneText: e.target.value }
                             })}
+                            minLength={10}
                         />
                     </div>
 
@@ -65,6 +74,7 @@ const NewQuestion = () => {
                             onChange={(e) => setQuestion(prevState => {
                                 return { ...prevState, optionTwoText: e.target.value }
                             })}
+                            minLength={10}
                         />
                     </div>
 
