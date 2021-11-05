@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { FiLogOut, FiMenu, FiX } from 'react-icons/fi';
+import { FiLogOut, FiMenu, FiX, FiPlusCircle, FiHome, FiGrid } from 'react-icons/fi';
 import { logout } from '../features/auth';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
@@ -14,19 +14,27 @@ export const Navbar = () => {
     const NavLinks = (
         <>
             <Link
-                className={clsx("px-8 py-2 font-medium", active === 0 && "text-green-500")}
+                className={clsx("flex items-center px-8 py-2 font-medium", active === 0 && "text-green-500")}
                 onClick={() => setActive(0)}
                 to="/dashboard"
             >
-                Home
+                <FiHome size={18} /> &nbsp; Home
             </Link>
 
             <Link
-                className={clsx("px-8 py-2 font-medium", active === 1 && "text-green-500")}
+                className={clsx("flex items-center px-8 py-2 font-medium", active === 1 && "text-green-500")}
                 onClick={() => setActive(1)}
+                to="/new"
+            >
+                <FiPlusCircle size={18} /> &nbsp; New Question
+            </Link>
+
+            <Link
+                className={clsx("flex items-center px-8 py-2 font-medium", active === 2 && "text-green-500")}
+                onClick={() => setActive(2)}
                 to="/leaderboard"
             >
-                Leaderboard
+                <FiGrid size={18} /> &nbsp; Leaderboard
             </Link>
         </>
     )

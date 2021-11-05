@@ -11,6 +11,15 @@ export const getQuestions = createAsyncThunk(
     }
 );
 
+export const addQuestion = createAsyncThunk(
+    'questions/addQuestion',
+    async (question, { getState }) => {
+        const author = getState().auth.authedUser;
+        question.author = author;
+        const response = await API._saveQuestion(question);
+        return response;
+    }
+);
 
 // thunk function for updating answered questions
 export const answerAndUpdateQuestions = (data) => (dispatch, getState) => {
@@ -58,7 +67,25 @@ export const questionsSlice = createSlice({
                     questions: action.payload,
                     loading: false
                 }
-            });
+            })
+            .addCase(addQuestion.pending, (state) => {
+                return {
+                    ...state,
+                    loading: true
+                }
+            })
+            .addCase(addQuestion.fulfilled, (state, action) => {
+                return {
+                    ...state,
+                    questions: {
+                        ...state.questions,
+                        [action.payload.id]: {
+                            ...action.payload
+                        },
+                    },
+                    loading: false
+                }
+            })
     },
 })
 
