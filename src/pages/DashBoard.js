@@ -4,10 +4,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getQuestions } from '../features/questions';
 import { QuestionCard, AnsweredQuestionCard, Loader } from '../components';
 
+
+// helper function to sort questions
+function sortQuestions(questions) {
+    return questions.sort((a, b) => b.timestamp - a.timestamp);
+}
+
 // helper function to filter questions
 function filterQuestions(questions, answers) {
     let answered = [];
     let unanswered = [];
+    let sortedAnswers = [];
+    let sortedUnAnswered = [];
     Object.keys(questions).forEach((key) => {
         if (answers[key]) {
             answered = answered.concat(questions[key])
@@ -15,8 +23,13 @@ function filterQuestions(questions, answers) {
             unanswered = unanswered.concat(questions[key])
         }
     })
-    return { answered, unanswered };
+
+    sortedAnswers = sortQuestions(answered);
+    sortedUnAnswered = sortQuestions(unanswered);
+
+    return { sortedAnswers, sortedUnAnswered };
 };
+
 
 const DashBoard = () => {
     const [active, setActive] = useState(0);
@@ -25,7 +38,7 @@ const DashBoard = () => {
     const questions = useSelector((state) => state.questions.questions);
     const loading = useSelector((state) => state.questions.loading);
     const answers = users[authedUser].answers;
-    const { answered, unanswered } = filterQuestions(questions, answers);
+    const { sortedAnswers, sortedUnAnswered } = filterQuestions(questions, answers);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -59,8 +72,8 @@ const DashBoard = () => {
                 </div>
                 {active === 0 ? (
                     <div className="py-4">
-                        {!unanswered.length && <p>No unanswered questions</p>}
-                        {unanswered?.map(({ id }) => {
+                        {!sortedUnAnswered.length && <p>No unanswered questions</p>}
+                        {sortedUnAnswered?.map(({ id }) => {
                             return (
                                 <QuestionCard
                                     key={id}
@@ -73,8 +86,8 @@ const DashBoard = () => {
                     </div>
                 ) : (
                     <div className="py-4">
-                        {!answered.length && <p>No answered questions</p>}
-                        {answered?.map(({ id }) => {
+                        {!sortedAnswers.length && <p>No answered questions</p>}
+                        {sortedAnswers?.map(({ id }) => {
                             return (
                                 <AnsweredQuestionCard
                                     key={id}
