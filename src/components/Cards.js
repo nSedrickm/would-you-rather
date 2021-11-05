@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { answerAndUpdateQuestions } from "../features/questions";
+import { saveQuestionAnswer } from "../features/questions";
 import { FiUser } from "react-icons/fi";
 
 export const UserCard = ({ name, selected, onClick, avatarUrl }) => {
@@ -50,7 +50,7 @@ export const QuestionCard = ({ author, question, authedUser }) => {
             toast.error('Please select an option');
         } else {
             dispatch(
-                answerAndUpdateQuestions({
+                saveQuestionAnswer({
                     questionId: question.id,
                     option,
                 })

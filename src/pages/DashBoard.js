@@ -47,7 +47,7 @@ const DashBoard = () => {
                             , active === 0 ? "bg-green-500 text-white" : "text-green-500 bg-white")}
                         onClick={() => setActive(0)}
                     >
-                        Unanswared Questions
+                        Unanswered Questions
                     </button>
                     <button
                         className={clsx("flex-grow p-4 text-lg md:text-xl font-bold border-b-2 border-green-500 rounded-tr-2xl outline-none "

@@ -1,6 +1,6 @@
 // user management
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { addUserAnswer } from './users';
+import { addUserAnswer, getUsers } from './users';
 import * as API from '../services/_DATA';
 
 export const getQuestions = createAsyncThunk(
@@ -21,7 +21,25 @@ export const addQuestion = createAsyncThunk(
     }
 );
 
-// thunk function for updating answered questions
+export const saveQuestionAnswer = createAsyncThunk(
+    'questions/saveQuestionAnswer',
+    async (answer, { getState, dispatch }) => {
+        const authedUser = getState().auth.authedUser;
+        const data = {
+            authedUser,
+            qid: answer.questionId,
+            answer: answer.option,
+        }
+        const response = await API._saveQuestionAnswer(data);
+        await dispatch(getQuestions());
+        await dispatch(getUsers());
+        return response;
+    }
+);
+
+/* thunk function for updating answered questions
+   synchronous alternative to saveQuestion answer above
+*/
 export const answerAndUpdateQuestions = (data) => (dispatch, getState) => {
     const { questionId, option } = data;
     const userId = getState().auth.authedUser;
@@ -83,6 +101,18 @@ export const questionsSlice = createSlice({
                             ...action.payload
                         },
                     },
+                    loading: false
+                }
+            })
+            .addCase(saveQuestionAnswer.pending, (state) => {
+                return {
+                    ...state,
+                    loading: true
+                }
+            })
+            .addCase(saveQuestionAnswer.fulfilled, (state) => {
+                return {
+                    ...state,
                     loading: false
                 }
             })
