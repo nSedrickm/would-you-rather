@@ -1,5 +1,6 @@
 // user management
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { addUserAnswer } from './users';
 import * as API from '../services/_DATA';
 
 export const getQuestions = createAsyncThunk(
@@ -10,6 +11,15 @@ export const getQuestions = createAsyncThunk(
     }
 );
 
+
+// thunk function for updating answered questions
+export const answerAndUpdateQuestions = (data) => (dispatch, getState) => {
+    const { questionId, option } = data;
+    const userId = getState().auth.authedUser;
+    dispatch(answerQuestion({ userId, questionId, option }))
+    dispatch(addUserAnswer({ userId, questionId, option }))
+};
+
 export const questionsSlice = createSlice({
     name: 'questions',
     initialState: {
@@ -18,16 +28,16 @@ export const questionsSlice = createSlice({
     },
     reducers: {
         answerQuestion: (state, action) => {
-            const { id, user, option } = action.payload;
+            const { userId, questionId, option } = action.payload;
             return {
                 ...state,
                 questions: {
                     ...state.questions,
-                    [id]: {
-                        ...state.questions[id],
+                    [questionId]: {
+                        ...state.questions[questionId],
                         [option]: {
-                            ...state.questions[id][option],
-                            votes: [...state.questions[id][option].votes, user]
+                            ...state.questions[questionId][option],
+                            votes: [...state.questions[questionId][option].votes, userId]
                         }
                     }
                 }
