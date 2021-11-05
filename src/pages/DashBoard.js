@@ -40,7 +40,7 @@ const DashBoard = () => {
         <div className="h-screen p-6 overflow-auto text-gray-700 bg-gradient-to-br from-blue-600 to-green-600 md:p-8">
             <h1 className="mb-10 text-5xl font-bold tracking-wide text-center text-white"> Dashboard </h1>
 
-            <div className="mx-auto bg-white rounded-2xl md:w-2/3">
+            <div className="mx-auto rounded-2xl md:w-2/3">
                 <div className="flex items-center">
                     <button
                         className={clsx("flex-grow p-4 text-lg md:text-xl font-bold border-b-2 border-green-500 rounded-tl-2xl outline-none "
@@ -58,7 +58,7 @@ const DashBoard = () => {
                     </button>
                 </div>
                 {active === 0 ? (
-                    <div className="p-4">
+                    <div className="py-4">
                         {!unanswered.length && <p>No unanswered questions</p>}
                         {unanswered?.map(({ id }) => {
                             return (
@@ -72,7 +72,7 @@ const DashBoard = () => {
                         })}
                     </div>
                 ) : (
-                    <div className="p-4">
+                    <div className="py-4">
                         {!answered.length && <p>No answered questions</p>}
                         {answered?.map(({ id }) => {
                             return (

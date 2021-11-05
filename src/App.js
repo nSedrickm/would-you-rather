@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/DashBoard";
 import NewQuestion from "./pages/NewQuestion.js";
 import LeaderBoard from "./pages/LeaderBoard";
+import QuestionDetails from "./pages/QuestionDetails";
 
 const App = () => {
   const authedUser = useSelector((state) => state.auth.authedUser);
@@ -30,6 +31,9 @@ const App = () => {
           </Route>
           <Route exact path="/new">
             {authedUser ? <NewQuestion /> : <Redirect to="/login" />}
+          </Route>
+          <Route exact path="/details/:qid">
+            {authedUser ? <QuestionDetails /> : <Redirect to="/login" />}
           </Route>
         </Switch>
 
