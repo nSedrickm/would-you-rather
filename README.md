@@ -12,3 +12,6 @@ Start Development server with `yarn start`
 Open the browser at [http://localhost:3000](http://localhost:3000) for preview
 
 
+## Preview 
+
+![loginscreen](./src/images/splash.png)

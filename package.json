@@ -2,6 +2,10 @@
   "name": "would-you-rather",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Ngwa Sedrick Meh",
+    "email": "nsedrick101@gmail.com"
+  },
   "scripts": {
     "prestart": "yarn run watch:css",
     "prebuild": "yarn run watch:css",
