@@ -1,10 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";  
-import { FiUser } from "react-icons/fi"; 
+import PropTypes from "prop-types";
+import { FiUser } from "react-icons/fi";
 
 export const LeaderBoardCard = ({ user }) => {
-    const { avatarURL, name, questions, answers } = user;
-    const score = questions.length + Object.keys(answers).length;
+    const { avatarURL, name, questions, answers, score } = user;
     return (
         <div className="flex flex-col items-center w-full p-4 mb-4 bg-white rounded-lg shadow-lg md:flex-row">
             <div className="flex-grow">
@@ -31,10 +30,10 @@ export const LeaderBoardCard = ({ user }) => {
                 </h3>
                 <div className="flex-grow">
                     <p className="my-2 font-bold">
-                        Questions Asked : {questions.length}
+                        Questions Asked : {questions}
                     </p>
                     <p className="my-2 font-bold">
-                        Questions Answered : {Object.keys(answers).length}
+                        Questions Answered : {answers}
                     </p>
                 </div>
             </div>
