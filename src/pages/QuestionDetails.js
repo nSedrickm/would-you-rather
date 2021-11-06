@@ -1,7 +1,8 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { DetailsCard, Loader } from '../components';
+import { getQuestions } from '../features/questions';
 import NotFound from './NotFound';
 
 
@@ -10,6 +11,13 @@ const QuestionDetails = () => {
     const questions = useSelector((state) => state.questions.questions);
     const loading = useSelector((state) => state.questions.loading);
     const question = questions[qid];
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (!Object.keys(questions).length) {
+            dispatch(getQuestions())
+        }
+    }, [questions, dispatch])
 
     if (loading) return <Loader />
 
